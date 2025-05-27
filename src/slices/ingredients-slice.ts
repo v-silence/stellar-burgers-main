@@ -21,7 +21,7 @@ export type IngredientsState = {
   error: SerializedError | null;
 };
 
-const initialState: IngredientsState = {
+export const initialState: IngredientsState = {
   items: [],
   buns: [],
   mains: [],
@@ -30,7 +30,7 @@ const initialState: IngredientsState = {
   error: null
 };
 
-const ingredientsSlice = createSlice({
+export const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
   reducers: {},

@@ -14,7 +14,7 @@ export type FeedState = {
   error: SerializedError | null;
 };
 
-const initialState: FeedState = {
+export const initialState: FeedState = {
   items: null,
   loading: false,
   error: null
@@ -25,7 +25,7 @@ export const fetchFeed = createAsyncThunk<TOrdersData>(
   async () => await getFeedsApi()
 );
 
-const feedSlice = createSlice({
+export const feedSlice = createSlice({
   name: 'feed',
   initialState,
   reducers: {},
@@ -52,7 +52,7 @@ export const selectFeedLoading = (state: RootState) => state.feed.loading;
 export const selectFeedError = (state: RootState) => state.feed.error;
 export const selectFeedOrders = createSelector(
   [selectFeedItems],
-  (feed) => feed?.orders ?? []
+  (feed) => feed?.orders || []
 );
 
 export default feedSlice.reducer;

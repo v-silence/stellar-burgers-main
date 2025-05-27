@@ -16,7 +16,7 @@ export type OrderState = {
   isLoadingOrder: boolean;
 };
 
-const initialState: OrderState = {
+export const initialState: OrderState = {
   order: [],
   orderRequest: false,
   orderError: null,
@@ -25,19 +25,22 @@ const initialState: OrderState = {
   isLoadingOrder: true
 };
 
-export const createOrder = createAsyncThunk<{ order: TOrder; name: string }, string[]>(
-  'order/createOrder',
-  async (ingredients, { rejectWithValue }) => {
-    try {
-      const response = await orderBurgerApi(ingredients);
-      return response;
-    } catch (error) {
-      return rejectWithValue(
-        (error as { message?: string }).message || 'Ошибка создания заказа'
-      );
-    }
+export const createOrder = createAsyncThunk<
+  {
+    order: TOrder;
+    name: string;
+  },
+  string[]
+>('order/createOrder', async (ingredients, { rejectWithValue }) => {
+  try {
+    const response = await orderBurgerApi(ingredients);
+    return response;
+  } catch (error) {
+    return rejectWithValue(
+      (error as { message?: string }).message || 'Ошибка создания заказа'
+    );
   }
-);
+});
 
 export const fetchOrderNumber = createAsyncThunk<TOrder, number>(
   'orders/fetchOrder',
