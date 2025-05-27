@@ -4,21 +4,21 @@ import { v4 as uuidv4 } from 'uuid';
 import { RootState } from '../services/store';
 
 // Состояние конструктора бургера
-type BuilderState = {
+export type BuilderState = {
   constructorItems: {
     bun: TIngredient | null;
     ingredients: TConstructorIngredient[];
   };
 };
 
-const initialState: BuilderState = {
+export const initialState: BuilderState = {
   constructorItems: {
     bun: null,
     ingredients: []
   }
 };
 
-const builderSlice = createSlice({
+export const builderSlice = createSlice({
   name: 'builder',
   initialState,
   reducers: {
@@ -66,12 +66,9 @@ const builderSlice = createSlice({
 });
 
 // Селекторы
-export const selectConstructorItems = (state: RootState) =>
-  state.builder.constructorItems;
-export const selectBun = (state: RootState) =>
-  state.builder.constructorItems.bun;
-export const selectIngredientsCount = (state: RootState) =>
-  state.builder.constructorItems.ingredients.length;
+export const selectConstructorItems = (state: RootState) => state.builder.constructorItems;
+export const selectBun = (state: RootState) => state.builder.constructorItems.bun;
+export const selectIngredientsCount = (state: RootState) => state.builder.constructorItems.ingredients.length;
 
 // Экшены
 export const {
